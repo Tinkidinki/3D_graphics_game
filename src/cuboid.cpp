@@ -18,66 +18,66 @@ Cuboid::Cuboid(float x, float y, float z,
     this->speed = 1;
 
     
- static const GLfloat vertex_buffer_data[] = {
-    // Front rectangle
-       //----Top triangle
-       -l, h, w,
-       l, h, w,
-       -l, -h, w,
-       //---Bottom triangle
-       -l, -h, w,
-       l, h, w, 
-       l, -h, w,
+    static const GLfloat vertex_buffer_data[] = {
+        // Front rectangle
+        //----Top triangle
+        -l, h, w,
+        l, h, w,
+        -l, -h, w,
+        //---Bottom triangle
+        -l, -h, w,
+        l, h, w, 
+        l, -h, w,
 
-    // Back rectangle
-       //----Top triangle
-       -l, h, -w,
-       l, h, -w,
-       -l, -h, -w,
-       //---Bottom triangle
-       -l, -h, -w,
-       l, h, -w, 
-       l, -h, -w,
-     
-    // Left rectangle
-       //----Top triangle
-       -l, h, -w,
-       -l, -h, -w,
-       -l, h, w,
-       //---Bottom triangle
-       -l, h, w,
-       -l,-h, -w, 
-       -l, -h, w,
+        // Back rectangle
+        //----Top triangle
+        -l, h, -w,
+        l, h, -w,
+        -l, -h, -w,
+        //---Bottom triangle
+        -l, -h, -w,
+        l, h, -w, 
+        l, -h, -w,
+        
+        // Left rectangle
+        //----Top triangle
+        -l, h, -w,
+        -l, -h, -w,
+        -l, h, w,
+        //---Bottom triangle
+        -l, h, w,
+        -l,-h, -w, 
+        -l, -h, w,
 
-    // Right rectangle
-       //----Top triangle
-       l, h, -w,
-       l, -h, -w,
-       l, h, w,
-       //---Bottom triangle
-       l, h, w,
-       l,-h, -w, 
-       l, -h, w,
+        // Right rectangle
+        //----Top triangle
+        l, h, -w,
+        l, -h, -w,
+        l, h, w,
+        //---Bottom triangle
+        l, h, w,
+        l,-h, -w, 
+        l, -h, w,
 
-     // Up rectangle
-       //----Top triangle
-       -l, h, -w,
-       -l, h, w,
-       l, h, -w,
-       //---Bottom triangle
-       l, h, -w,
-       -l, h, w, 
-       l, h, w
+        // Up rectangle
+        //----Top triangle
+        -l, h, -w,
+        -l, h, w,
+        l, h, -w,
+        //---Bottom triangle
+        l, h, -w,
+        -l, h, w, 
+        l, h, w
 
-    // Down rectangle
-       //----Top triangle
-       -l, -h, -w,
-       -l, -h, w,
-       l, -h, -w,
-       //---Bottom triangle
-       l, -h, -w,
-       -l, -h, w, 
-       l, -h, w
+        // Down rectangle
+        //----Top triangle
+        -l, -h, -w,
+        -l, -h, w,
+        l, -h, -w,
+        //---Bottom triangle
+        l, -h, -w,
+        -l, -h, w, 
+        l, -h, w
 
     };
 
