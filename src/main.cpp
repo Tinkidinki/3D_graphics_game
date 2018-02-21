@@ -15,6 +15,7 @@ GLFWwindow *window;
 
 // Ball ball1;
 Cuboid cuboid1;
+// Cuboid cuboid2;
 
 
 
@@ -34,10 +35,12 @@ void draw() {
     glUseProgram (programID);
 
     // Eye - Location of camera. Don't change unless you are sure!!
+    // ---- LOCATION VECTOR
     glm::vec3 eye ( 5*cos(camera_rotation_angle*M_PI/180.0f), 0, 5*sin(camera_rotation_angle*M_PI/180.0f) );
     // Target - Where is the camera looking at.  Don't change unless you are sure!!
+    // ---- LOOK VECTOR
     glm::vec3 target (0, 0, 0);
-    // Up - Up vector defines tilt of camera.  Don't change unless you are sure!!
+    // Up - UP VECTOR
     glm::vec3 up (0, 1, 0);
 
     // Compute Camera matrix (view)
@@ -57,6 +60,7 @@ void draw() {
     // Scene render
     // ball1.draw(VP);
     cuboid1.draw(VP);
+    // cuboid2.draw(VP);
 }
 
 void tick_input(GLFWwindow *window) {
@@ -69,7 +73,7 @@ void tick_input(GLFWwindow *window) {
 
 void tick_elements() {
     //cuboid1.tick();
-    camera_rotation_angle += 1;
+    // camera_rotation_angle += 1;
 }
 
 /* Initialize the OpenGL rendering properties */
