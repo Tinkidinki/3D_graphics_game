@@ -21,6 +21,10 @@ float r = 5; //Length from the target
 float phi_rad;
 float theta_rad;
 float FoV = 45.0f;
+double xpos = 0;
+double ypos = 0;
+double normalised_xpos = 0;
+double normalised_ypos = 0;
 
 Timer t60(1.0 / 60);
 
@@ -41,7 +45,7 @@ void draw() {
        theta_rad = theta* M_PI/180.0f;
        glm::vec3 eye(r*cos(phi_rad)*sin(theta_rad), r*sin(phi_rad), r*cos(phi_rad)*cos(theta_rad));
     // Target - Where is the camera looking at.  Don't change unless you are sure!!
-    glm::vec3 target (0, 0, 0);
+    glm::vec3 target (normalised_xpos, normalised_ypos, 0);
     // Up - Up vector defines tilt of camera.  Don't change unless you are sure!!
     glm::vec3 up (0, 1, 0);
 
@@ -93,6 +97,11 @@ void tick_input(GLFWwindow *window) {
     cout << "Phi:" << phi <<endl;
     cout << "Theta:" << theta <<endl;
     cout << "R:" << r <<endl;
+
+    glfwGetCursorPos(window, &xpos, &ypos);
+    normalised_xpos = (8.0f* xpos)/1368.0f - 4.0f;
+    normalised_ypos = (8.0f* ypos)/768.0f + 4.0f;
+
 
 }
 
