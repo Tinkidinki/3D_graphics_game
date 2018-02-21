@@ -67,7 +67,7 @@ Cuboid::Cuboid(float x, float y, float z,
         //---Bottom triangle
         l, h, -w,
         -l, h, w, 
-        l, h, w
+        l, h, w,
 
         // Down rectangle
         //----Top triangle

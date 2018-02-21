@@ -107,7 +107,7 @@ void tick_input(GLFWwindow *window) {
 
     glfwGetCursorPos(window, &xpos, &ypos);
     normalised_xpos = (8.0f* xpos)/1368.0f - 4.0f;
-    normalised_ypos = (8.0f* ypos)/768.0f + 4.0f;
+    normalised_ypos = (8.0f* ypos)/768.0f - 4.0f;
 
 
 }
