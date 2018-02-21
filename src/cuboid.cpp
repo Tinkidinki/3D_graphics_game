@@ -18,7 +18,7 @@ Cuboid::Cuboid(float x, float y, float z,
     this->speed = 1;
 
     
-    static const GLfloat vertex_buffer_data[] = {
+    const GLfloat vertex_buffer_data[] = {
         // Front rectangle
         //----Top triangle
         -l, h, w,

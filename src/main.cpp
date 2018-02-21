@@ -15,8 +15,8 @@ GLFWwindow *window;
 
 // Ball ball1;
 Cuboid cuboid1;
-// Cuboid cuboid2;
-
+Cuboid cuboid2;
+Cuboid cuboid3;
 
 
 float screen_zoom = 1, screen_center_x = 0, screen_center_y = 0;
@@ -71,7 +71,8 @@ void draw() {
     // Scene render
     // ball1.draw(VP);
     cuboid1.draw(VP);
-    // cuboid2.draw(VP);
+    cuboid2.draw(VP);
+    cuboid3.draw(VP);
 }
 
 void tick_input(GLFWwindow *window) {
@@ -124,6 +125,8 @@ void initGL(GLFWwindow *window, int width, int height) {
     // Create the models
 
     cuboid1 = Cuboid(0,0,0, 1.0f, 1.0f, 1.0f, 0, 0, 0, COLOR_GREEN);
+    cuboid2 = Cuboid(2,2,2, 0.5f, 1.0f, 0.25f, 0, 0, 0, COLOR_RED);
+    cuboid3 = Cuboid(1,0,0, 0.5f, 0.5f, 0.5f, 0, 0, 0, COLOR_BLACK);
 
     // Create and compile our GLSL program from the shaders
     programID = LoadShaders("Sample_GL.vert", "Sample_GL.frag");
