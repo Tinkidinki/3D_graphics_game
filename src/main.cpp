@@ -20,6 +20,7 @@ float phi = 0; //the vertical angle
 float r = 5; //Length from the target
 float phi_rad;
 float theta_rad;
+float FoV = 45.0f;
 
 Timer t60(1.0 / 60);
 
@@ -132,8 +133,8 @@ void initGL(GLFWwindow *window, int width, int height) {
 
 int main(int argc, char **argv) {
     srand(time(0));
-    int width  = 600;
-    int height = 600;
+    int width  = 768;
+    int height = 1368;
 
     window = initGLFW(width, height);
 
@@ -171,5 +172,6 @@ void reset_screen() {
     float bottom = screen_center_y - 4 / screen_zoom;
     float left   = screen_center_x - 4 / screen_zoom;
     float right  = screen_center_x + 4 / screen_zoom;
-    Matrices.projection = glm::ortho(left, right, bottom, top, 0.1f, 500.0f);
+   // Matrices.projection = glm::ortho(left, right, bottom, top, 0.1f, 500.0f);
+   Matrices.projection = glm::perspective(glm::radians(FoV), 4.0f / 3.0f, 0.1f, 100.0f);
 }
