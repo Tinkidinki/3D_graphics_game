@@ -15,7 +15,11 @@ GLFWwindow *window;
 Ball ball1;
 
 float screen_zoom = 1, screen_center_x = 0, screen_center_y = 0;
-float camera_rotation_angle = 0;
+float theta = 0; //the horizontal angle
+float phi = 0; //the vertical angle
+float r = 5; //Length from the target
+float phi_rad;
+float theta_rad;
 
 Timer t60(1.0 / 60);
 
@@ -30,7 +34,11 @@ void draw() {
     glUseProgram (programID);
 
     // Eye - Location of camera. Don't change unless you are sure!!
-    glm::vec3 eye ( 5*cos(camera_rotation_angle*M_PI/180.0f), 0, 5*sin(camera_rotation_angle*M_PI/180.0f) );
+    
+    // glm::vec3 eye ( 5*cos(camera_rotation_angle*M_PI/180.0f), 0, 5*sin(camera_rotation_angle*M_PI/180.0f) );
+       phi_rad = phi* M_PI/180.0f;
+       theta_rad = theta* M_PI/180.0f;
+       glm::vec3 eye(r*cos(phi_rad)*sin(theta_rad), r*sin(phi_rad), r*cos(phi_rad)*cos(theta_rad));
     // Target - Where is the camera looking at.  Don't change unless you are sure!!
     glm::vec3 target (0, 0, 0);
     // Up - Up vector defines tilt of camera.  Don't change unless you are sure!!
@@ -55,16 +63,41 @@ void draw() {
 }
 
 void tick_input(GLFWwindow *window) {
-    int left  = glfwGetKey(window, GLFW_KEY_LEFT);
-    int right = glfwGetKey(window, GLFW_KEY_RIGHT);
+    int left  = glfwGetKey(window, GLFW_KEY_A);
+    int right = glfwGetKey(window, GLFW_KEY_D);
+    int up = glfwGetKey(window, GLFW_KEY_W);
+    int down = glfwGetKey(window, GLFW_KEY_S);
+    int front = glfwGetKey(window, GLFW_KEY_R);
+    int back = glfwGetKey(window, GLFW_KEY_F);
+
     if (left) {
-        // Do something
+        theta -= 1;
     }
+    else if (right){
+        theta += 1;
+    }
+    else if (up){
+        phi+= 1;
+    }
+    else if (down){
+        phi-= 1;
+    }
+    else if (back){
+        r+=1;
+    }
+    else if (front){
+        r-=1;
+    }
+    
+    cout << "Phi:" << phi <<endl;
+    cout << "Theta:" << theta <<endl;
+    cout << "R:" << r <<endl;
+
 }
 
 void tick_elements() {
-    ball1.tick();
-    camera_rotation_angle += 1;
+   // ball1.tick();
+    
 }
 
 /* Initialize the OpenGL rendering properties */
