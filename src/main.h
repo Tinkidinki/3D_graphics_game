@@ -81,5 +81,15 @@ extern const color_t COLOR_RED;
 extern const color_t COLOR_GREEN;
 extern const color_t COLOR_BLACK;
 extern const color_t COLOR_BACKGROUND;
+extern const color_t COLOR_CRIMSON;
+extern const color_t COLOR_PINK;
+extern const color_t COLOR_MAGENTA;
+extern const color_t COLOR_INDIGO; 
+extern const color_t COLOR_BLUE;
+extern const color_t COLOR_GREEN; 
+extern const color_t COLOR_YELLOW;
+extern const color_t COLOR_ORANGE;
+extern const color_t COLOR_BRICK;	
+extern const color_t COLOR_WHITE; 
 
 #endif

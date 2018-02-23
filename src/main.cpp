@@ -17,6 +17,7 @@ GLFWwindow *window;
 Cuboid cuboid1;
 Cuboid cuboid2;
 Cuboid cuboid3;
+Cuboid ground;
 
 
 float screen_zoom = 1, screen_center_x = 0, screen_center_y = 0;
@@ -50,7 +51,8 @@ void draw() {
        theta_rad = theta* M_PI/180.0f;
        glm::vec3 eye(r*cos(phi_rad)*sin(theta_rad), r*sin(phi_rad), r*cos(phi_rad)*cos(theta_rad));
     // Target - Where is the camera looking at.  Don't change unless you are sure!!
-    glm::vec3 target (normalised_xpos, normalised_ypos, 0);
+    glm::vec3 target (0, 0, 0);
+    // glm::vec3 target (normalised_xpos, normalised_ypos, 0);
     // Up - Up vector defines tilt of camera.  Don't change unless you are sure!!
     glm::vec3 up (0, 1, 0);
 
@@ -73,6 +75,7 @@ void draw() {
     cuboid1.draw(VP);
     cuboid2.draw(VP);
     cuboid3.draw(VP);
+    ground.draw(VP);
 }
 
 void tick_input(GLFWwindow *window) {
@@ -83,22 +86,22 @@ void tick_input(GLFWwindow *window) {
     int front = glfwGetKey(window, GLFW_KEY_R);
     int back = glfwGetKey(window, GLFW_KEY_F);
 
-    if (left) {
+    if (left && theta > -89) {
         theta -= 1;
     }
-    else if (right){
+    else if (right && theta < 89){
         theta += 1;
     }
-    else if (up){
+    else if (up && phi < 89){
         phi+= 1;
     }
-    else if (down){
+    else if (down && phi > 1){
         phi-= 1;
     }
     else if (back){
         r+=1;
     }
-    else if (front){
+    else if (front && r>2){
         r-=1;
     }
     
@@ -126,7 +129,11 @@ void initGL(GLFWwindow *window, int width, int height) {
 
     cuboid1 = Cuboid(0,0,0, 1.0f, 1.0f, 1.0f, 0, 0, 0, COLOR_GREEN);
     cuboid2 = Cuboid(2,2,2, 0.5f, 1.0f, 0.25f, 0, 0, 0, COLOR_RED);
-    cuboid3 = Cuboid(1,0,0, 0.5f, 0.5f, 0.5f, 0, 0, 0, COLOR_BLACK);
+    cuboid3 = Cuboid(1,0,0, 0.5f, 0.5f, 0.5f, 0, 0, 0, COLOR_RED);
+    ground = Cuboid(0,-500,0,1000.0f, 1000.0f, 1000.0f, 0, 0, 0, COLOR_INDIGO);
+    
+    
+    
 
     // Create and compile our GLSL program from the shaders
     programID = LoadShaders("Sample_GL.vert", "Sample_GL.frag");
@@ -147,6 +154,9 @@ void initGL(GLFWwindow *window, int width, int height) {
     cout << "RENDERER: " << glGetString(GL_RENDERER) << endl;
     cout << "VERSION: " << glGetString(GL_VERSION) << endl;
     cout << "GLSL: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << endl;
+    cout<< "Ground height:" << ground.height << endl;
+    cout<< "Ground width:" << ground.width << endl;
+    cout<< "Ground length:" << ground.length << endl;
 }
 
 
@@ -154,6 +164,8 @@ int main(int argc, char **argv) {
     srand(time(0));
     int width  = 768;
     int height = 1368;
+
+   
 
     window = initGLFW(width, height);
 
