@@ -94,5 +94,6 @@ extern const color_t COLOR_WHITE;
 
 // own functions
 void boat_control(char action);
+void jump();
 
 #endif

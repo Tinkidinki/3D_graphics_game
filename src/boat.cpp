@@ -43,6 +43,8 @@ void Boat::tick(){
     sail.set_position(this->position.x + 1, this->position.y + 4.5f, this->position.z);
     cannon.set_position(this->position.x, this->position.y + 0.5f, this->position.z - 3.5f);
 
+    this->keep_at_bay();
+
 
 }
 
@@ -51,4 +53,11 @@ void Boat::draw(glm::mat4 VP){
     shaft.draw(VP);
     sail.draw(VP);
     cannon.draw(VP);
+}
+
+void Boat::keep_at_bay(){
+    if (this->position.y < 0){
+        this-> position.y = 0;
+        this-> acceleration.y = 0;
+    }
 }

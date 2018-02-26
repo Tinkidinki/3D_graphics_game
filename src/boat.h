@@ -15,6 +15,7 @@ public:
     void set_position(float x, float y, float z);
     void set_velocity(float x, float y, float z);
     void set_acceleration(float x, float y, float z);
+    void keep_at_bay();
     void tick();
 
     // Parts

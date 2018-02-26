@@ -230,3 +230,10 @@ void boat_control(char action){
             boat.angle_in_degrees -=5;
     }
 }
+
+void jump(){
+    if (boat.position.y == 0){
+        boat.velocity.y = 0.08;
+        boat.acceleration.y = -0.0005;
+    }
+}
