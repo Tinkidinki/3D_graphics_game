@@ -216,10 +216,12 @@ void boat_control(char action){
     cout << "Called:"<< action <<endl;
     switch(action){
         case 'f':
-            boat.velocity.z -= 0.01;
+            boat.velocity.z = -0.03 * cos(boat.angle_in_degrees * M_PI / 180.0f);
+            boat.velocity.x = -0.03 * sin(boat.angle_in_degrees * M_PI / 180.0f);
             break;
         case 'b':
-            boat.velocity.z += 0.01;
+            boat.velocity.z = 0.03 * cos(boat.angle_in_degrees * M_PI / 180.0f);
+            boat.velocity.x = 0.03 * sin(boat.angle_in_degrees * M_PI / 180.0f);
             break;
         case 'l':
             boat.angle_in_degrees +=5;

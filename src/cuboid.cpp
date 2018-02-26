@@ -91,6 +91,7 @@ void Cuboid::draw(glm::mat4 VP) {
     glm::mat4 translate = glm::translate (this->position);    // glTranslatef
     // glm::mat4 rotate    = glm::rotate((float) (this->rotation.x * M_PI / 180.0f), glm::vec3(1, 0, 0));
     glm::mat4 translate_initial = glm::translate(this->initial_position);
+    glm::mat4 translate_back = glm::translate(- this->initial_position);
     glm::mat4 rotate    = glm::rotate((float) (this->angle_in_degrees * M_PI / 180.0f), glm::vec3(0, 1, 0));
     
     // No need as coords centered at 0, 0, 0 of cube arouund which we waant to rotate
@@ -103,7 +104,9 @@ void Cuboid::draw(glm::mat4 VP) {
     // Seems really simple!
 
     // Matrices.model *= (translate *-translate_initial * rotate * translate_initial);
-    Matrices.model *= (rotate * translate);
+    Matrices.model *= (translate * translate_back * rotate * translate_initial);
+    
+    // Matrices.model *= (rotate * translate);
     glm::mat4 MVP = VP * Matrices.model;
     glUniformMatrix4fv(Matrices.MatrixID, 1, GL_FALSE, &MVP[0][0]);
     draw3DObject(this->object);
