@@ -2,6 +2,7 @@
 #include "timer.h"
 #include "ball.h"
 #include "cuboid.h"
+#include "boat.h"
 
 using namespace std;
 
@@ -14,10 +15,11 @@ GLFWwindow *window;
 **************************/
 
 // Ball ball1;
-Cuboid cuboid1;
-Cuboid cuboid2;
-Cuboid cuboid3;
+// Cuboid cuboid1;
+// Cuboid cuboid2;
+// Cuboid cuboid3;
 Cuboid ground;
+Boat boat;
 
 
 float screen_zoom = 1, screen_center_x = 0, screen_center_y = 0;
@@ -72,10 +74,11 @@ void draw() {
 
     // Scene render
     // ball1.draw(VP);
-    cuboid1.draw(VP);
-    cuboid2.draw(VP);
-    cuboid3.draw(VP);
+    // cuboid1.draw(VP);
+    // cuboid2.draw(VP);
+    // cuboid3.draw(VP);
     ground.draw(VP);
+    boat.draw(VP);
 }
 
 void tick_input(GLFWwindow *window) {
@@ -105,9 +108,9 @@ void tick_input(GLFWwindow *window) {
         r-=1;
     }
     
-    cout << "Phi:" << phi <<endl;
-    cout << "Theta:" << theta <<endl;
-    cout << "R:" << r <<endl;
+    // cout << "Phi:" << phi <<endl;
+    // cout << "Theta:" << theta <<endl;
+    // cout << "R:" << r <<endl;
 
     glfwGetCursorPos(window, &xpos, &ypos);
     normalised_xpos = (8.0f* xpos)/1368.0f - 4.0f;
@@ -118,6 +121,7 @@ void tick_input(GLFWwindow *window) {
 
 void tick_elements() {
    // ball1.tick();
+   boat.tick();
     
 }
 
@@ -127,11 +131,11 @@ void initGL(GLFWwindow *window, int width, int height) {
     /* Objects should be created before any other gl function and shaders */
     // Create the models
 
-    cuboid1 = Cuboid(0,0,0, 1.0f, 1.0f, 1.0f, 0, 0, 0, COLOR_GREEN);
-    cuboid2 = Cuboid(2,2,2, 0.5f, 1.0f, 0.25f, 0, 0, 0, COLOR_RED);
-    cuboid3 = Cuboid(1,0,0, 0.5f, 0.5f, 0.5f, 0, 0, 0, COLOR_RED);
+    // cuboid1 = Cuboid(0,0,0, 1.0f, 1.0f, 1.0f, 0, 0, 0, COLOR_GREEN);
+    // cuboid2 = Cuboid(2,2,2, 0.5f, 1.0f, 0.25f, 0, 0, 0, COLOR_RED);
+    // cuboid3 = Cuboid(1,0,0, 0.5f, 0.5f, 0.5f, 0, 0, 0, COLOR_RED);
     ground = Cuboid(0,-500,0,1000.0f, 1000.0f, 1000.0f, 0, 0, 0, COLOR_INDIGO);
-    
+    boat = Boat(0);
     
     
 
@@ -205,4 +209,22 @@ void reset_screen() {
     float right  = screen_center_x + 4 / screen_zoom;
    // Matrices.projection = glm::ortho(left, right, bottom, top, 0.1f, 500.0f);
    Matrices.projection = glm::perspective(glm::radians(FoV), 4.0f / 3.0f, 0.1f, 100.0f);
+}
+
+// own functions
+void boat_control(char action){
+    cout << "Called:"<< action <<endl;
+    switch(action){
+        case 'f':
+            boat.velocity.z -= 0.01;
+            break;
+        case 'b':
+            boat.velocity.z += 0.01;
+            break;
+        case 'l':
+            boat.angle_in_degrees +=5;
+            break;
+        case 'r':
+            boat.angle_in_degrees -=5;
+    }
 }

@@ -12,6 +12,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "main.h"
+#include "boat.h"
 
 bool   cannon_keyboard_input = true;
 bool   drag_pan = false, old_cki;
@@ -42,6 +43,18 @@ void keyboard(GLFWwindow *window, int key, int scancode, int action, int mods) {
         switch (key) {
         case GLFW_KEY_ESCAPE:
             quit(window);
+            break;
+        case GLFW_KEY_UP:
+            boat_control('f');
+            break;
+        case GLFW_KEY_DOWN:
+            boat_control('b');
+            break;
+        case GLFW_KEY_LEFT:
+            boat_control('l');
+            break;
+        case GLFW_KEY_RIGHT:
+            boat_control('r');
             break;
         default:
             break;

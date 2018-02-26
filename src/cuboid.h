@@ -12,7 +12,9 @@ public:
             float rot_x, float rot_y, float rot_z,
             color_t color);
     glm::vec3 position;
+    glm::vec3 initial_position;
     glm::vec3 rotation;
+    float angle_in_degrees;
     void draw(glm::mat4 VP);
     void set_position(float x, float y, float z);
     void tick();
