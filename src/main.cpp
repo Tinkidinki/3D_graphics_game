@@ -53,7 +53,7 @@ void draw() {
        theta_rad = theta* M_PI/180.0f;
        glm::vec3 eye(r*cos(phi_rad)*sin(theta_rad), r*sin(phi_rad), r*cos(phi_rad)*cos(theta_rad));
     // Target - Where is the camera looking at.  Don't change unless you are sure!!
-    glm::vec3 target (0, 0, 0);
+    glm::vec3 target (boat.position.x, boat.position.y, boat.position.z);
     // glm::vec3 target (normalised_xpos, normalised_ypos, 0);
     // Up - Up vector defines tilt of camera.  Don't change unless you are sure!!
     glm::vec3 up (0, 1, 0);
@@ -197,10 +197,9 @@ int main(int argc, char **argv) {
     quit(window);
 }
 
-bool detect_collision(bounding_box_t a, bounding_box_t b) {
-    return (abs(a.x - b.x) * 2 < (a.width + b.width)) &&
-           (abs(a.y - b.y) * 2 < (a.height + b.height));
-}
+// bool detect_collision(Cuboid* a, Cuboid* b) {
+//     return true;
+// }
 
 void reset_screen() {
     float top    = screen_center_y + 4 / screen_zoom;
@@ -233,7 +232,7 @@ void boat_control(char action){
 
 void jump(){
     if (boat.position.y == 0){
-        boat.velocity.y = 0.08;
-        boat.acceleration.y = -0.0005;
+        boat.velocity.y = 0.1;
+        boat.acceleration.y = -0.001;
     }
 }

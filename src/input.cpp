@@ -36,7 +36,7 @@ void keyboard(GLFWwindow *window, int key, int scancode, int action, int mods) {
         // case GLFW_KEY_X:
         // // do something ..
         // break;
-        default:
+         default:
         break;
         }
     } else if (action == GLFW_PRESS) {

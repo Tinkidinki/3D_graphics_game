@@ -122,3 +122,7 @@ void Cuboid::tick() {
     // this->position.y -= speed;
 }
 
+bool Cuboid::detect_collision(Cuboid* a, Cuboid* b){
+    return false;
+}
+

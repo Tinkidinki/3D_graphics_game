@@ -19,6 +19,8 @@ public:
     void set_position(float x, float y, float z);
     void tick();
 
+    static bool detect_collision(Cuboid* a, Cuboid* b);
+
     float height;
     float length;
     float width;
