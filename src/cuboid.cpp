@@ -124,6 +124,17 @@ void Cuboid::tick() {
 
 bool Cuboid::detect_collision(Cuboid* a, Cuboid* b){
     // return (abs(a->position.x - b->position.x)*2 < a->width + b.width)
-    return false;
+    float a_radius = (a->width + a->length + a->height)/3.0f;
+    float b_radius = (b->width + b->length + b->height)/3.0f;
+    float x_square = pow(a->position.x - b->position.x, 2);
+    float y_square = pow(a->position.y - b->position.y, 2);
+    float z_square = pow(a->position.z - b->position.z, 2);
+    float dist = sqrt(x_square + y_square + z_square);
+
+    if (dist < a_radius + b_radius)
+        return true;
+    else 
+        return false;
+
 }
 
