@@ -123,6 +123,7 @@ void Cuboid::tick() {
 }
 
 bool Cuboid::detect_collision(Cuboid* a, Cuboid* b){
+    // return (abs(a->position.x - b->position.x)*2 < a->width + b.width)
     return false;
 }
 

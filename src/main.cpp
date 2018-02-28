@@ -22,6 +22,7 @@ GLFWwindow *window;
 Cuboid ground;
 Boat boat;
 Rock rock;
+vector<Rock> Rocks;
 
 
 float screen_zoom = 1, screen_center_x = 0, screen_center_y = 0;
@@ -82,6 +83,9 @@ void draw() {
     ground.draw(VP);
     boat.draw(VP);
     rock.draw(VP);
+    for(int i=0;i<5;i++){
+        Rocks[i].draw(VP);
+    }
 }
 
 void tick_input(GLFWwindow *window) {
@@ -140,6 +144,9 @@ void initGL(GLFWwindow *window, int width, int height) {
     ground = Cuboid(0,-500,0,1000.0f, 1000.0f, 1000.0f, 0, 0, 0, COLOR_INDIGO);
     boat = Boat(0);
     rock = Rock(3,0,3);
+    for(int i=0;i<5;i++){
+        Rocks.push_back(Rock(0, 0, -6*i+1));
+    }
     
     
     
