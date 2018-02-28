@@ -3,6 +3,7 @@
 #include "ball.h"
 #include "cuboid.h"
 #include "boat.h"
+#include "rock.h"
 
 using namespace std;
 
@@ -20,6 +21,7 @@ GLFWwindow *window;
 // Cuboid cuboid3;
 Cuboid ground;
 Boat boat;
+Rock rock;
 
 
 float screen_zoom = 1, screen_center_x = 0, screen_center_y = 0;
@@ -79,6 +81,7 @@ void draw() {
     // cuboid3.draw(VP);
     ground.draw(VP);
     boat.draw(VP);
+    rock.draw(VP);
 }
 
 void tick_input(GLFWwindow *window) {
@@ -136,6 +139,8 @@ void initGL(GLFWwindow *window, int width, int height) {
     // cuboid3 = Cuboid(1,0,0, 0.5f, 0.5f, 0.5f, 0, 0, 0, COLOR_RED);
     ground = Cuboid(0,-500,0,1000.0f, 1000.0f, 1000.0f, 0, 0, 0, COLOR_INDIGO);
     boat = Boat(0);
+    rock = Rock(3,0,3);
+    
     
     
 
