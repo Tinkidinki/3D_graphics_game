@@ -11,6 +11,7 @@ Cuboid::Cuboid(float x, float y, float z,
     this->rotation = glm::vec3(rot_x, rot_y, rot_z);
     this->angle_in_degrees = 0;
 
+
     this->height = height; // Corresponds to y coordinate
     this->width = width;   // Corresponds to z coordinate
     this->length = length;  // Corresponds to x coordintate
