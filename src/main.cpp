@@ -4,6 +4,7 @@
 #include "cuboid.h"
 #include "boat.h"
 #include "rock.h"
+#include "barrel_and_gift.h"
 
 using namespace std;
 
@@ -22,6 +23,7 @@ GLFWwindow *window;
 Cuboid ground;
 Boat boat;
 Rock rock;
+BarrelAndGift bg;
 // vector<Rock> Rocks;
 
 
@@ -83,6 +85,7 @@ void draw() {
     ground.draw(VP);
     boat.draw(VP);
     rock.draw(VP);
+    bg.draw(VP);
     // for(int i=0;i<5;i++){
     //     Rocks[i].draw(VP);
     // }
@@ -130,6 +133,7 @@ void tick_elements() {
    // ball1.tick();
    boat.tick();
    rock.tick(&boat);
+   bg.tick(&boat);
     
 }
 
@@ -145,6 +149,7 @@ void initGL(GLFWwindow *window, int width, int height) {
     ground = Cuboid(0,-500,0,1000.0f, 1000.0f, 1000.0f, 0, 0, 0, COLOR_INDIGO);
     boat = Boat(0);
     rock = Rock(5,0,5);
+    bg = BarrelAndGift(-15.0f, -15.0f);
     // for(int i=0;i<5;i++){
     //     Rocks.push_back(Rock(0, 0, -6*i+1));
     // }
