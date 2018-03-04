@@ -30,13 +30,8 @@ void Boat::tick(){
     sail.angle_in_degrees = this->angle_in_degrees;
     cannon.angle_in_degrees = this->angle_in_degrees;
     
-    this->position.x += this->velocity.x;
-    this->position.y += this->velocity.y;
-    this->position.z += this->velocity.z;
-
-    this->velocity.x += this->acceleration.x;
-    this->velocity.y += this->acceleration.y;
-    this->velocity.z += this->acceleration.z;
+    this->position += this->velocity;
+    this->velocity += this->acceleration;
 
     hull.set_position(this->position.x, this->position.y, this->position.z);
     shaft.set_position(this->position.x, this->position.y + 3.5f, this->position.z);
@@ -56,7 +51,7 @@ void Boat::draw(glm::mat4 VP){
 }
 
 void Boat::keep_at_bay(){
-    if (this->position.y < 0){
+    if (this-> position.y < 0){
         this-> position.y = 0;
         this-> acceleration.y = 0;
     }

@@ -5,6 +5,7 @@
 #include "boat.h"
 #include "rock.h"
 #include "barrel_and_gift.h"
+#include "fireball.h"
 
 using namespace std;
 
@@ -24,6 +25,8 @@ Cuboid ground;
 Boat boat;
 Rock rock;
 BarrelAndGift bg;
+Fireball* fireball;
+bool Fireball::exists = false;
 // vector<Rock> Rocks;
 
 
@@ -36,10 +39,11 @@ float theta_rad;
 float FoV = 45.0f;
 double xpos = 0;
 double ypos = 0;
-double normalised_xpos = 0;
-double normalised_ypos = 0;
+float normalised_xpos = 0;
+float normalised_ypos = 0;
 int width  = 768;
 int height = 1368;
+bool fireball_exists = false;
 
 Timer t60(1.0 / 60);
 
@@ -89,11 +93,13 @@ void draw() {
     rock.draw(VP);
     bg.draw(VP);
 
-    glm::vec4 test = glm::vec4(3, 4 ,30, 1);
-    cout<<"Testing MVP:"<<glm::to_string(get_mouse_world_coordinates())<<endl;
     // for(int i=0;i<5;i++){
     //     Rocks[i].draw(VP);
     // }
+
+    if (Fireball::exists){
+        fireball->draw(VP);
+    }
 }
 
 
@@ -103,7 +109,8 @@ void tick_input(GLFWwindow *window) {
     int up = glfwGetKey(window, GLFW_KEY_W);
     int down = glfwGetKey(window, GLFW_KEY_S);
     int front = glfwGetKey(window, GLFW_KEY_R);
-    int back = glfwGetKey(window, GLFW_KEY_F);
+    int back = glfwGetKey(window, GLFW_KEY_E);
+    int fire = glfwGetKey(window, GLFW_KEY_F);
 
     if (left && theta > -89) {
         theta -= 1;
@@ -132,30 +139,33 @@ void tick_input(GLFWwindow *window) {
     normalised_xpos = (8.0f* xpos)/1368.0f - 4.0f;
     normalised_ypos = (8.0f* ypos)/768.0f - 4.0f;
 
+    if (fire){
+        glm::vec3 boat_pos = glm::vec3(boat.cannon.position.x, boat.cannon.position.y, boat.cannon.position.z);
+        fireball = new Fireball(boat_pos, normalised_xpos, normalised_ypos);
+    }
+
 
 }
 
 void tick_elements() {
-   // ball1.tick();
    boat.tick();
    rock.tick(&boat);
    bg.tick(&boat);
+
+   if (Fireball::exists)
+       fireball->tick(&boat);
+   
     
 }
 
 /* Initialize the OpenGL rendering properties */
 /* Add all the models to be created here */
 void initGL(GLFWwindow *window, int width, int height) {
-    /* Objects should be created before any other gl function and shaders */
-    // Create the models
-
-    // cuboid1 = Cuboid(0,0,0, 1.0f, 1.0f, 1.0f, 0, 0, 0, COLOR_GREEN);
-    // cuboid2 = Cuboid(2,2,2, 0.5f, 1.0f, 0.25f, 0, 0, 0, COLOR_RED);
-    // cuboid3 = Cuboid(1,0,0, 0.5f, 0.5f, 0.5f, 0, 0, 0, COLOR_RED);
-    ground = Cuboid(0,-500,0,1000.0f, 1000.0f, 1000.0f, 0, 0, 0, COLOR_INDIGO);
+     ground = Cuboid(0,-500,0,1000.0f, 1000.0f, 1000.0f, 0, 0, 0, COLOR_INDIGO);
     boat = Boat(0);
     rock = Rock(5,0,5);
     bg = BarrelAndGift(-15.0f, -15.0f);
+    
     // for(int i=0;i<5;i++){
     //     Rocks.push_back(Rock(0, 0, -6*i+1));
     // }
@@ -219,10 +229,6 @@ int main(int argc, char **argv) {
     quit(window);
 }
 
-// bool detect_collision(Cuboid* a, Cuboid* b) {
-//     return true;
-// }
-
 void reset_screen() {
     float top    = screen_center_y + 4 / screen_zoom;
     float bottom = screen_center_y - 4 / screen_zoom;
@@ -259,15 +265,6 @@ void jump(){
     }
 }
 
-glm::vec4 get_mouse_world_coordinates(){
-    double xpos, ypos;
-    glfwGetCursorPos(window, &xpos, &ypos);
-    glm::mat4 VP = Matrices.projection * Matrices.view;
-    glm::mat4 VP_inverse = glm::inverse(VP);
-
-    float middle_x = 2.0 * xpos/width - 1;
-    float middle_y = 2.0 * ypos/height - 1;
-
-    glm::vec4 point3D = glm::vec4(middle_x, middle_y, 0, 1);
-    return VP_inverse * point3D;
-}
+// double xpos, ypos;
+//     glfwGetCursorPos(window, &xpos, &ypos);
+    
