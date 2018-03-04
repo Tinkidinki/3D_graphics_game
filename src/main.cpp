@@ -1,4 +1,4 @@
-    #include "main.h"
+#include "main.h"
 #include "timer.h"
 #include "ball.h"
 #include "cuboid.h"
@@ -38,6 +38,8 @@ double xpos = 0;
 double ypos = 0;
 double normalised_xpos = 0;
 double normalised_ypos = 0;
+int width  = 768;
+int height = 1368;
 
 Timer t60(1.0 / 60);
 
@@ -86,10 +88,14 @@ void draw() {
     boat.draw(VP);
     rock.draw(VP);
     bg.draw(VP);
+
+    glm::vec4 test = glm::vec4(3, 4 ,30, 1);
+    cout<<"Testing MVP:"<<glm::to_string(get_mouse_world_coordinates())<<endl;
     // for(int i=0;i<5;i++){
     //     Rocks[i].draw(VP);
     // }
 }
+
 
 void tick_input(GLFWwindow *window) {
     int left  = glfwGetKey(window, GLFW_KEY_A);
@@ -184,8 +190,6 @@ void initGL(GLFWwindow *window, int width, int height) {
 
 int main(int argc, char **argv) {
     srand(time(0));
-    int width  = 768;
-    int height = 1368;
 
    
 
@@ -253,4 +257,17 @@ void jump(){
         boat.velocity.y = 0.1;
         boat.acceleration.y = -0.001;
     }
+}
+
+glm::vec4 get_mouse_world_coordinates(){
+    double xpos, ypos;
+    glfwGetCursorPos(window, &xpos, &ypos);
+    glm::mat4 VP = Matrices.projection * Matrices.view;
+    glm::mat4 VP_inverse = glm::inverse(VP);
+
+    float middle_x = 2.0 * xpos/width - 1;
+    float middle_y = 2.0 * ypos/height - 1;
+
+    glm::vec4 point3D = glm::vec4(middle_x, middle_y, 0, 1);
+    return VP_inverse * point3D;
 }

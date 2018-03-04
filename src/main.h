@@ -13,6 +13,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include "glm/ext.hpp"
 
 
 struct color_t {
@@ -95,5 +96,6 @@ extern const color_t COLOR_WHITE;
 // own functions
 void boat_control(char action);
 void jump();
+glm::vec4 get_mouse_world_coordinates();
 
 #endif
