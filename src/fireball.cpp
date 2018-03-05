@@ -22,13 +22,13 @@ void Fireball::tick(Boat* boat, Monster* monster){
     this->velocity += this->acceleration;
     this->position += this->velocity;
 
-    this->keep_at_bay(boat);
+    // if (Cuboid::detect_collision(this, &(monster->head))
+    //     or Cuboid::detect_collision(this, &(monster->body))) {
+    //     Monster::number_of_monsters--;
+    //     monster->position = glm::vec3(0, -20.0f, 0);
+    // }
 
-    if (Cuboid::detect_collision(this, &(monster->head))
-        or Cuboid::detect_collision(this, &(monster->body))) {
-        Monster::number_of_monsters--;
-        monster->position = glm::vec3(0, -20.0f, 0);
-    }
+    this->keep_at_bay(boat);
 }
 
 void Fireball::keep_at_bay(Boat* boat){

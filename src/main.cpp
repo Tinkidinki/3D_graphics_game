@@ -173,9 +173,9 @@ void tick_elements() {
         for(int i=0;i<5;i++)
             fireball->tick(&boat, &Monsters[i]);
 
-    if (Monster::number_of_monsters > 0)
-        for(int i=0;i<5;i++)
-            fireball->tick(&boat, &Monsters[i]);
+    // if (Monster::number_of_monsters > 0)
+    //     for(int i=0;i<5;i++)
+    //         fireball->tick(&boat, &Monsters[i]);
    
     
 }
