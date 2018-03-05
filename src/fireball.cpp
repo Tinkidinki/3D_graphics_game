@@ -1,4 +1,6 @@
 #include "fireball.h"
+#include <stdio.h>
+using namespace std;
 
 Fireball::Fireball(glm::vec3 cannon_position, float x_pos, float y_pos):
     Cuboid(cannon_position.x, cannon_position.y, cannon_position.z, 
@@ -22,13 +24,16 @@ void Fireball::tick(Boat* boat, Monster* monster){
     this->velocity += this->acceleration;
     this->position += this->velocity;
 
-    // if (Cuboid::detect_collision(this, &(monster->head))
-    //     or Cuboid::detect_collision(this, &(monster->body))) {
-    //     Monster::number_of_monsters--;
-    //     monster->position = glm::vec3(0, -20.0f, 0);
-    // }
+    if (Monster::number_of_monsters > 0){
+        if (Cuboid::detect_collision(this, &(monster->head))
+            or Cuboid::detect_collision(this, &(monster->body))) {
+            Monster::number_of_monsters--;
+            cout << "Num of monsters" << Monster::number_of_monsters << endl;
+            monster->position = glm::vec3(0, -20.0f, 0);
+        }
+    }
 
-    this->keep_at_bay(boat);
+    // this->keep_at_bay(boat);
 }
 
 void Fireball::keep_at_bay(Boat* boat){

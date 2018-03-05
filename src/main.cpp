@@ -27,7 +27,7 @@ Boat boat;
 BarrelAndGift bg;
 Fireball* fireball;
 bool Fireball::exists = false;
-int Monster::number_of_monsters = 5;
+int Monster::number_of_monsters = 0;
 vector<Rock> Rocks;
 vector<Monster> Monsters;
 
