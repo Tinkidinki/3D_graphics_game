@@ -33,6 +33,7 @@ vector<Rock> Rocks;
 vector<Monster> Monsters;
 int score =0;
 int health = 5;
+string Title;
 
 
 
@@ -167,9 +168,23 @@ void tick_input(GLFWwindow *window) {
 }
 
 void tick_elements() {
-   boat.tick();
-   bg1.tick(&boat);
-   bg2.tick(&boat);
+    //checks
+    if (Monster::number_of_monsters <=0){
+        cout<<"YOU WIN!"<<endl;
+        cout <<"Final score" << score << endl;
+        exit(0);
+    }
+    else if (health <=0){
+        cout <<"GAME OVER! No health left" << endl;
+        cout <<"Final score" << score << endl;
+        exit(0);
+    }
+
+    cout <<"SCORE:"<<score<<" HEALTH:"<<health<<endl;
+
+    boat.tick();
+    bg1.tick(&boat);
+    bg2.tick(&boat);
 
 
     for(int i=0;i<5;i++)

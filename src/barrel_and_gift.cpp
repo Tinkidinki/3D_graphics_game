@@ -16,6 +16,7 @@ BarrelAndGift::BarrelAndGift(float x, float z){
 void BarrelAndGift::tick(Boat* boat){
     if (Cuboid::detect_collision(&(this->gift), &(boat->hull))){
         this->gift.position.y = -10.0f;
+        change_score(15);
     }
 }
 

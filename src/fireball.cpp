@@ -30,6 +30,7 @@ void Fireball::tick(Boat* boat, Monster* monster){
             Monster::number_of_monsters--;
             cout << "Num of monsters" << Monster::number_of_monsters << endl;
             monster->set_position(glm::vec3(0, -20.0f, 0));
+            change_score(10);
         }
     }
 
