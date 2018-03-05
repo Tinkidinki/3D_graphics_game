@@ -32,7 +32,7 @@ int Monster::number_of_monsters = 5;
 vector<Rock> Rocks;
 vector<Monster> Monsters;
 int score =0;
-int health = 5;
+int health = 10;
 string Title;
 
 
@@ -72,8 +72,8 @@ void draw() {
        theta_rad = theta* M_PI/180.0f;
        glm::vec3 eye(r*cos(phi_rad)*sin(theta_rad), r*sin(phi_rad), r*cos(phi_rad)*cos(theta_rad));
     // Target - Where is the camera looking at.  Don't change unless you are sure!!
-    // glm::vec3 target (boat.position.x, boat.position.y, boat.position.z);
-    glm::vec3 target (normalised_xpos, normalised_ypos, 0);
+    glm::vec3 target (boat.position.x, boat.position.y, boat.position.z);
+    //glm::vec3 target (normalised_xpos, normalised_ypos, 0);
     // Up - Up vector defines tilt of camera.  Don't change unless you are sure!!
     glm::vec3 up (0, 1, 0);
 
@@ -171,12 +171,12 @@ void tick_elements() {
     //checks
     if (Monster::number_of_monsters <=0){
         cout<<"YOU WIN!"<<endl;
-        cout <<"Final score" << score << endl;
+        cout <<"FINAL SCORE:" << score << endl;
         exit(0);
     }
     else if (health <=0){
         cout <<"GAME OVER! No health left" << endl;
-        cout <<"Final score" << score << endl;
+        cout <<"FINAL SCORE:" << score << endl;
         exit(0);
     }
 
