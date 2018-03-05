@@ -6,6 +6,7 @@
 #include "rock.h"
 #include "barrel_and_gift.h"
 #include "fireball.h"
+#include "monster.h"
 
 using namespace std;
 
@@ -26,7 +27,9 @@ Boat boat;
 Rock rock;
 BarrelAndGift bg;
 Fireball* fireball;
+Monster monster;
 bool Fireball::exists = false;
+int Monster::number_of_monsters = 0;
 // vector<Rock> Rocks;
 
 
@@ -92,14 +95,21 @@ void draw() {
     boat.draw(VP);
     rock.draw(VP);
     bg.draw(VP);
+    
 
     // for(int i=0;i<5;i++){
     //     Rocks[i].draw(VP);
     // }
 
+    if (Monster::number_of_monsters > 0)
+        monster.draw(VP);
+
+
     if (Fireball::exists){
         fireball->draw(VP);
     }
+
+
 }
 
 
@@ -144,6 +154,8 @@ void tick_input(GLFWwindow *window) {
         fireball = new Fireball(boat_pos, normalised_xpos, normalised_ypos);
     }
 
+      
+
 
 }
 
@@ -152,8 +164,11 @@ void tick_elements() {
    rock.tick(&boat);
    bg.tick(&boat);
 
-   if (Fireball::exists)
-       fireball->tick(&boat);
+    if (Fireball::exists)
+       fireball->tick(&boat, &monster);
+
+    if (Monster::number_of_monsters > 0)
+        monster.tick(&boat);
    
     
 }
@@ -165,6 +180,8 @@ void initGL(GLFWwindow *window, int width, int height) {
     boat = Boat(0);
     rock = Rock(5,0,5);
     bg = BarrelAndGift(-15.0f, -15.0f);
+    monster = Monster(15, 15);
+   
     
     // for(int i=0;i<5;i++){
     //     Rocks.push_back(Rock(0, 0, -6*i+1));

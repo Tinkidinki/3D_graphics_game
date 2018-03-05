@@ -18,11 +18,17 @@ Fireball::Fireball(glm::vec3 cannon_position, float x_pos, float y_pos):
 
 }
 
-void Fireball::tick(Boat* boat){
+void Fireball::tick(Boat* boat, Monster* monster){
     this->velocity += this->acceleration;
     this->position += this->velocity;
 
     this->keep_at_bay(boat);
+
+    if (Cuboid::detect_collision(this, &(monster->head))
+        or Cuboid::detect_collision(this, &(monster->body))) {
+        Monster::number_of_monsters--;
+        monster->position = glm::vec3(0, -20.0f, 0);
+    }
 }
 
 void Fireball::keep_at_bay(Boat* boat){

@@ -1,6 +1,7 @@
 #include "main.h"
 #include "cuboid.h"
 #include "boat.h"
+#include "monster.h"
 
 #ifndef FIREBALL_H
 #define FIREBALL_H
@@ -13,7 +14,7 @@ public:
 
     // Functions
     void keep_at_bay(Boat* boat);
-    void tick(Boat* boat);
+    void tick(Boat* boat, Monster* monster);
 
   
 
