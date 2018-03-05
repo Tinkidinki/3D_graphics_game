@@ -24,13 +24,13 @@ GLFWwindow *window;
 // Cuboid cuboid3;
 Cuboid ground;
 Boat boat;
-Rock rock;
 BarrelAndGift bg;
 Fireball* fireball;
-Monster monster;
 bool Fireball::exists = false;
-int Monster::number_of_monsters = 0;
-// vector<Rock> Rocks;
+int Monster::number_of_monsters = 5;
+vector<Rock> Rocks;
+vector<Monster> Monsters;
+
 
 
 float screen_zoom = 1, screen_center_x = 0, screen_center_y = 0;
@@ -93,16 +93,18 @@ void draw() {
     // cuboid3.draw(VP);
     ground.draw(VP);
     boat.draw(VP);
-    rock.draw(VP);
     bg.draw(VP);
     
 
-    // for(int i=0;i<5;i++){
-    //     Rocks[i].draw(VP);
-    // }
+    for(int i=0;i<5;i++){
+        Rocks[i].draw(VP);
+    }
+
 
     if (Monster::number_of_monsters > 0)
-        monster.draw(VP);
+        for(int i=0;i<5;i++){
+            Monsters[i].draw(VP);
+    }
 
 
     if (Fireball::exists){
@@ -161,14 +163,19 @@ void tick_input(GLFWwindow *window) {
 
 void tick_elements() {
    boat.tick();
-   rock.tick(&boat);
    bg.tick(&boat);
 
+
+    for(int i=0;i<5;i++)
+            Rocks[i].tick(&boat);
+
     if (Fireball::exists)
-       fireball->tick(&boat, &monster);
+        for(int i=0;i<5;i++)
+            fireball->tick(&boat, &Monsters[i]);
 
     if (Monster::number_of_monsters > 0)
-        monster.tick(&boat);
+        for(int i=0;i<5;i++)
+            fireball->tick(&boat, &Monsters[i]);
    
     
 }
@@ -178,9 +185,20 @@ void tick_elements() {
 void initGL(GLFWwindow *window, int width, int height) {
      ground = Cuboid(0,-500,0,1000.0f, 1000.0f, 1000.0f, 0, 0, 0, COLOR_INDIGO);
     boat = Boat(0);
-    rock = Rock(5,0,5);
     bg = BarrelAndGift(-15.0f, -15.0f);
-    monster = Monster(15, 15);
+
+    Rocks.push_back(Rock(5, 0, 5));
+    Rocks.push_back(Rock(10, 0, 10));
+    Rocks.push_back(Rock(5, 0, -5));
+    Rocks.push_back(Rock(-10, 0, -10));
+    Rocks.push_back(Rock(-15, 0, 5));
+
+    Monsters.push_back(Monster(20, 20));
+    Monsters.push_back(Monster(-20, 20));
+    Monsters.push_back(Monster(20, -20));
+    Monsters.push_back(Monster(-20, -20));
+    Monsters.push_back(Monster(25, 20));
+
    
     
     // for(int i=0;i<5;i++){
