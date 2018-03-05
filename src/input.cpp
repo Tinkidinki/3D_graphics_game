@@ -56,21 +56,21 @@ void keyboard(GLFWwindow *window, int key, int scancode, int action, int mods) {
         case GLFW_KEY_RIGHT:
             boat_control('r');
             break;
-        case GLFW_KEY_1:
-            switch_view(1);
-            break;
-        case GLFW_KEY_2:
-            switch_view(2);
-            break;
-        case GLFW_KEY_3:
-            switch_view(3);
-            break;
-        case GLFW_KEY_4:
-            switch_view(4);
-            break;
-        case GLFW_KEY_5:
-            switch_view(5);
-            break;
+        // case GLFW_KEY_1:
+        //     switch_view(1);
+        //     break;
+        // case GLFW_KEY_2:
+        //     switch_view(2);
+        //     break;
+        // case GLFW_KEY_3:
+        //     switch_view(3);
+        //     break;
+        // case GLFW_KEY_4:
+        //     switch_view(4);
+        //     break;
+        // case GLFW_KEY_5:
+        //     switch_view(5);
+        //     break;
         default:
             break;
         }

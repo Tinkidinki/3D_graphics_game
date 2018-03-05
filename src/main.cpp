@@ -49,8 +49,6 @@ float normalised_ypos = 0;
 int width  = 768;
 int height = 1368;
 bool fireball_exists = false;
-glm::vec3 target = glm::vec3(0,0,0);
-glm::vec3 eye = glm::vec3(0,0,0);
 
 Timer t60(1.0 / 60);
 
@@ -71,8 +69,8 @@ void draw() {
        theta_rad = theta* M_PI/180.0f;
        glm::vec3 eye(r*cos(phi_rad)*sin(theta_rad), r*sin(phi_rad), r*cos(phi_rad)*cos(theta_rad));
     // Target - Where is the camera looking at.  Don't change unless you are sure!!
-    glm::vec3 target (target.x, target.y, target.z);
-    // glm::vec3 target (normalised_xpos, normalised_ypos, 0);
+    // glm::vec3 target (boat.position.x, boat.position.y, boat.position.z);
+    glm::vec3 target (normalised_xpos, normalised_ypos, 0);
     // Up - Up vector defines tilt of camera.  Don't change unless you are sure!!
     glm::vec3 up (0, 1, 0);
 
@@ -315,12 +313,6 @@ void jump(){
     }
 }
 
-void switch_view(int view){
-    switch(view){
-        case 1: // boat view
-
-    }
-}
 
 // double xpos, ypos;
 //     glfwGetCursorPos(window, &xpos, &ypos);
