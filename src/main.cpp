@@ -31,6 +31,8 @@ bool Fireball::exists = false;
 int Monster::number_of_monsters = 5;
 vector<Rock> Rocks;
 vector<Monster> Monsters;
+int score =0;
+int health = 5;
 
 
 
@@ -311,6 +313,14 @@ void jump(){
         boat.velocity.y = 0.1;
         boat.acceleration.y = -0.001;
     }
+}
+
+void change_score(int delta){
+    score+=delta;
+}
+
+void change_health(int delta){
+    health+=delta;
 }
 
 
