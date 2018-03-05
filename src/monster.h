@@ -12,6 +12,7 @@ public:
     Monster(float x, float z);
     void tick(Boat* boat);
     void draw(glm::mat4 VP);
+    void set_position(glm::vec3 position);
     
     Cuboid body;
     Cuboid head;

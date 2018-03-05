@@ -10,7 +10,7 @@ Monster::Monster(float x, float z){
     this->body = Cuboid(this->position.x, 0, this->position.z, 3, 2, 2, 0, 0, 0, COLOR_GREEN);
     this->head = Cuboid(this->position.x, 1.5f + 0.75f, this->position.z, 1.5f, 1.5f, 1.5f, 0, 0, 0, COLOR_GREEN);
 
-    Monster::number_of_monsters++;
+    //Monster::number_of_monsters++;
 
 
 }
@@ -26,3 +26,8 @@ void Monster::draw(glm::mat4 VP){
     this->body.draw(VP);
 }
 // or Cuboid::detect_collision(&(this->body), fireball))
+
+void Monster::set_position(glm::vec3 new_position){
+    this->head.position = new_position;
+    this->body.position = new_position;
+}

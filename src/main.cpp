@@ -24,12 +24,14 @@ GLFWwindow *window;
 // Cuboid cuboid3;
 Cuboid ground;
 Boat boat;
-BarrelAndGift bg;
+BarrelAndGift bg1;
+BarrelAndGift bg2;
 Fireball* fireball;
 bool Fireball::exists = false;
-int Monster::number_of_monsters = 0;
+int Monster::number_of_monsters = 5;
 vector<Rock> Rocks;
 vector<Monster> Monsters;
+
 
 
 
@@ -47,6 +49,8 @@ float normalised_ypos = 0;
 int width  = 768;
 int height = 1368;
 bool fireball_exists = false;
+glm::vec3 target = glm::vec3(0,0,0);
+glm::vec3 eye = glm::vec3(0,0,0);
 
 Timer t60(1.0 / 60);
 
@@ -67,7 +71,7 @@ void draw() {
        theta_rad = theta* M_PI/180.0f;
        glm::vec3 eye(r*cos(phi_rad)*sin(theta_rad), r*sin(phi_rad), r*cos(phi_rad)*cos(theta_rad));
     // Target - Where is the camera looking at.  Don't change unless you are sure!!
-    glm::vec3 target (boat.position.x, boat.position.y, boat.position.z);
+    glm::vec3 target (target.x, target.y, target.z);
     // glm::vec3 target (normalised_xpos, normalised_ypos, 0);
     // Up - Up vector defines tilt of camera.  Don't change unless you are sure!!
     glm::vec3 up (0, 1, 0);
@@ -93,7 +97,8 @@ void draw() {
     // cuboid3.draw(VP);
     ground.draw(VP);
     boat.draw(VP);
-    bg.draw(VP);
+    bg1.draw(VP);
+    bg2.draw(VP);
     
 
     for(int i=0;i<5;i++){
@@ -101,10 +106,10 @@ void draw() {
     }
 
 
-    if (Monster::number_of_monsters > 0)
-        for(int i=0;i<5;i++){
-            Monsters[i].draw(VP);
+    for(int i=0;i<5;i++){
+        Monsters[i].draw(VP);
     }
+
 
 
     if (Fireball::exists){
@@ -163,19 +168,27 @@ void tick_input(GLFWwindow *window) {
 
 void tick_elements() {
    boat.tick();
-   bg.tick(&boat);
+   bg1.tick(&boat);
+   bg2.tick(&boat);
 
 
     for(int i=0;i<5;i++)
             Rocks[i].tick(&boat);
 
     if (Fireball::exists)
-        for(int i=0;i<5;i++)
+        for(int i=0;i<5;i++){
             fireball->tick(&boat, &Monsters[i]);
+            // glm:vec3 mon_pos = Monster[i]
+            // cout<< "Monster "<<i<<"position:"<<glm:to_string(Monster[i].position)<<endl;
+        }
+            
+    
 
-    // if (Monster::number_of_monsters > 0)
+
+    // if (Monster::number_of_monsters > 0){
     //     for(int i=0;i<5;i++)
     //         fireball->tick(&boat, &Monsters[i]);
+    // }
    
     
 }
@@ -183,9 +196,11 @@ void tick_elements() {
 /* Initialize the OpenGL rendering properties */
 /* Add all the models to be created here */
 void initGL(GLFWwindow *window, int width, int height) {
-     ground = Cuboid(0,-500,0,1000.0f, 1000.0f, 1000.0f, 0, 0, 0, COLOR_INDIGO);
+    ground = Cuboid(0,-500,0,1000.0f, 1000.0f, 1000.0f, 0, 0, 0, COLOR_INDIGO);
     boat = Boat(0);
-    bg = BarrelAndGift(-15.0f, -15.0f);
+    bg1 = BarrelAndGift(-15.0f, -15.0f);
+    bg2 = BarrelAndGift(-10.0f, 15.0f);
+  
 
     Rocks.push_back(Rock(5, 0, 5));
     Rocks.push_back(Rock(10, 0, 10));
@@ -278,12 +293,12 @@ void boat_control(char action){
     cout << "Called:"<< action <<endl;
     switch(action){
         case 'f':
-            boat.velocity.z = -0.05 * cos(boat.angle_in_degrees * M_PI / 180.0f);
-            boat.velocity.x = -0.05 * sin(boat.angle_in_degrees * M_PI / 180.0f);
+            boat.velocity.z = -0.08 * cos(boat.angle_in_degrees * M_PI / 180.0f);
+            boat.velocity.x = -0.08 * sin(boat.angle_in_degrees * M_PI / 180.0f);
             break;
         case 'b':
-            boat.velocity.z = 0.05 * cos(boat.angle_in_degrees * M_PI / 180.0f);
-            boat.velocity.x = 0.05 * sin(boat.angle_in_degrees * M_PI / 180.0f);
+            boat.velocity.z = 0.08 * cos(boat.angle_in_degrees * M_PI / 180.0f);
+            boat.velocity.x = 0.08 * sin(boat.angle_in_degrees * M_PI / 180.0f);
             break;
         case 'l':
             boat.angle_in_degrees +=5;
@@ -297,6 +312,13 @@ void jump(){
     if (boat.position.y == 0){
         boat.velocity.y = 0.1;
         boat.acceleration.y = -0.001;
+    }
+}
+
+void switch_view(int view){
+    switch(view){
+        case 1: // boat view
+
     }
 }
 

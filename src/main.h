@@ -97,5 +97,6 @@ extern const color_t COLOR_WHITE;
 void boat_control(char action);
 void jump();
 glm::vec4 get_mouse_world_coordinates();
+void switch_view(int view);
 
 #endif

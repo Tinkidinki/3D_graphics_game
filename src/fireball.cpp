@@ -29,7 +29,7 @@ void Fireball::tick(Boat* boat, Monster* monster){
             or Cuboid::detect_collision(this, &(monster->body))) {
             Monster::number_of_monsters--;
             cout << "Num of monsters" << Monster::number_of_monsters << endl;
-            monster->position = glm::vec3(0, -20.0f, 0);
+            monster->set_position(glm::vec3(0, -20.0f, 0));
         }
     }
 
