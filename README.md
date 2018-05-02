@@ -1,11 +1,3 @@
-Graphics Boilerplate Code
+3D Graphics Game
 =========================
-
-This is boilerplate code for the assignments which might be helpful.
-
-
-License
--------
-The MIT License https://meghprkh.mit-license.org/
-
-Copyright &copy; 2018 Megh Parikh <meghprkh@gmail.com>
+Enjoy!
